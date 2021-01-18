@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.interfas_whatsapp.Models.user;
 import com.example.interfas_whatsapp.R;
 
@@ -38,11 +39,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UsuarioViewHol
         user usuario = lstUsuarios.get(position);
 
         holder.textViewName.setText(usuario.getFirst_name());
-        holder.textViewMail.setText(usuario.getEmail());
-        holder.textViewURLAvatar.setText(usuario.getAvatar());
+        holder.textViewMail.setText("11:40 a.m");
+        holder.textViewURLAvatar.setText("Hola estos son mensajes de ejemplo");
 
         Glide.with(Ctx)
                 .load(usuario.getAvatar())
+                .apply(RequestOptions.circleCropTransform())
                 .into(holder.imageView);
 
     }
@@ -63,8 +65,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UsuarioViewHol
             super(itemView);
 
             textViewName= itemView.findViewById(R.id.txtName);
-            textViewURLAvatar = itemView.findViewById(R.id.txtAvatar);
-            textViewMail = itemView.findViewById(R.id.txtMail);
+            textViewURLAvatar = itemView.findViewById(R.id.txtMsj);
+            textViewMail = itemView.findViewById(R.id.txtHora);
             imageView = itemView.findViewById(R.id.imgAvatar);
         }
     }
