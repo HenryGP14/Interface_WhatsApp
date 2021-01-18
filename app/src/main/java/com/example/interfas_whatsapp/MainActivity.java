@@ -42,20 +42,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
-
-                if(tab.getPosition() == 0)
-                {
-                    pagerAdapter.notifyDataSetChanged();
-                }
-                else if(tab.getPosition() == 1)
-                {
-                    pagerAdapter.notifyDataSetChanged();
-                }
-                else if(tab.getPosition() == 2)
-                {
-                    pagerAdapter.notifyDataSetChanged();
-                }
-
             }
 
             @Override
