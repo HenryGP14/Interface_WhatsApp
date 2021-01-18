@@ -12,10 +12,16 @@ import com.example.interfas_whatsapp.Fragment.tabLlamada;
 public class PageAdapter extends FragmentPagerAdapter {
 
     private int numftabs;
+    private tabChat chat;
+    private  tabEstado estado;
+    private tabLlamada llamada;
 
     public PageAdapter(@NonNull FragmentManager fm, int numOfTabs) {
         super(fm);
         this.numftabs = numOfTabs;
+        llamada = new tabLlamada();
+        estado = new tabEstado();
+        chat = new tabChat();
     }
 
     @NonNull
@@ -24,11 +30,11 @@ public class PageAdapter extends FragmentPagerAdapter {
         switch (position)
         {
             case 0:
-                return new tabChat();
+                return chat;
             case 1:
-                return new tabEstado();
+                return estado;
             case 2:
-                return new tabLlamada();
+                return llamada;
             default:
                 return null;
         }
