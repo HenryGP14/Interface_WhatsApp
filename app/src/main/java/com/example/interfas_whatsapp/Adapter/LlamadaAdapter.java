@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -16,33 +17,31 @@ import com.example.interfas_whatsapp.R;
 
 import java.util.List;
 
-public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UsuarioViewHolder>{
+public class LlamadaAdapter extends RecyclerView.Adapter<LlamadaAdapter.LlamadaViewHolder>{
     private Context Ctx;
     private List<user> lstUsuarios;
 
-    public UserAdapter(Context mCtx, List<user> usuarios) {
+    public LlamadaAdapter(Context mCtx, List<user> usuarios) {
         this.lstUsuarios = usuarios;
         Ctx = mCtx;
     }
 
     @Override
-    public UsuarioViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public LlamadaAdapter.LlamadaViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //inflating and returning our view holder
         View view;
         LayoutInflater inflater = LayoutInflater.from(Ctx);
-        view = inflater.inflate(R.layout.item_usuario, null);
-        return new UsuarioViewHolder(view);
+        view = inflater.inflate(R.layout.item_llamada, null);
+        return new LlamadaAdapter.LlamadaViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(UsuarioViewHolder holder, int position) {
-
+    public void onBindViewHolder(@NonNull LlamadaAdapter.LlamadaViewHolder holder, int position) {
         user usuario = lstUsuarios.get(position);
 
         holder.textViewName.setText(usuario.getFirst_name());
+        holder.textTime.setText("Ayer 7:00 p.m");
 
-        holder.textViewHora.setText("11:40 a.m");
-        holder.textViewMessage.setText("Hola estos son mensajes de ejemplo " + (position + 1));
 
         Glide.with(Ctx)
                 .load(usuario.getAvatar())
@@ -51,27 +50,23 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UsuarioViewHol
 
     }
 
-
     @Override
     public int getItemCount() {
         return lstUsuarios.size();
     }
 
 
-    class UsuarioViewHolder extends RecyclerView.ViewHolder {
+    class LlamadaViewHolder extends RecyclerView.ViewHolder {
 
         TextView textViewName, textViewMessage, textViewHora, textTime;
         ImageView imageView;
 
-        public UsuarioViewHolder(View itemView) {
+        public LlamadaViewHolder(View itemView) {
             super(itemView);
 
-            textViewMessage = itemView.findViewById(R.id.txtMsj);
-            textViewHora = itemView.findViewById(R.id.txtHora);
-
+            textTime = itemView.findViewById(R.id.txtTime);
             textViewName= itemView.findViewById(R.id.txtName);
             imageView = itemView.findViewById(R.id.imgAvatar);
         }
     }
-
 }

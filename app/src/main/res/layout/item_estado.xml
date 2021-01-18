@@ -20,6 +20,7 @@
                 android:id="@+id/imgAvatar"
                 android:layout_width="56dp"
                 android:layout_height="56dp"
+                android:background="@drawable/strok_img"
                 android:src="@mipmap/ic_launcher_round" />
 
             <TextView
@@ -32,28 +33,16 @@
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                 android:textColor="#000000" />
 
-            <TextView
-                android:id="@+id/txtHora"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/txtMsj"
-                android:layout_marginLeft="280dp"
-                android:layout_marginTop="-48dp"
-                android:layout_toRightOf="@id/imgAvatar"
-                android:text="hh:mm a.m"
-                android:textAlignment="viewStart"
-                android:textColor="#000000"
-                android:textSize="5pt" />
 
             <TextView
-                android:id="@+id/txtMsj"
+                android:id="@+id/txtTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/txtName"
                 android:layout_marginLeft="11dp"
                 android:layout_marginTop="9dp"
                 android:layout_toRightOf="@id/imgAvatar"
-                android:text="Mesaje"
+                android:text="Tiempo"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
 
 

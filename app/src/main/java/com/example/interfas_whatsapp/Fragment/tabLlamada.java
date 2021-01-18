@@ -3,19 +3,38 @@ package com.example.interfas_whatsapp.Fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
+import android.widget.Toast;
 
+import com.example.interfas_whatsapp.Adapter.EstadoAdapter;
+import com.example.interfas_whatsapp.Adapter.LlamadaAdapter;
+import com.example.interfas_whatsapp.Models.user;
 import com.example.interfas_whatsapp.R;
+import com.example.interfas_whatsapp.WebService.Asynchtask;
+import com.example.interfas_whatsapp.WebService.WebService;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link tabLlamada#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class tabLlamada extends Fragment {
+public class tabLlamada extends Fragment implements Asynchtask {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -57,10 +76,49 @@ public class tabLlamada extends Fragment {
         }
     }
 
+    private String URL = "https://reqres.in/api/users";
+    public ArrayList<user> usuarios;
+    private RecyclerView recyclerView;
+    View v;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tab_llamada, container, false);
+        v = inflater.inflate(R.layout.fragment_tab_llamada, container, false);
+        recyclerView = v.findViewById(R.id.llamada_recyclerview);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        Map<String, String> datos = new HashMap<String, String>();
+        WebService webService = new WebService(URL, datos,getContext(), tabLlamada.this);
+        webService.execute("GET");
+
+        return v;
+    }
+
+    @Override
+    public void processFinish(String result) throws JSONException {
+        usuarios = new ArrayList<user> ();
+
+        try {
+
+            JSONObject JSONlista =  new JSONObject(result);
+            JSONArray JSONlistaUsuarios=  JSONlista.getJSONArray("data");
+
+            usuarios = user.JsonObjectsBuild(JSONlistaUsuarios);
+
+            LlamadaAdapter adapatorLlamada = new LlamadaAdapter(getContext(), usuarios);
+
+            int resId = R.anim.layout_animation_down_to_up;
+            LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(getContext(), resId);
+            recyclerView.setLayoutAnimation(animation);
+
+            recyclerView.setAdapter(adapatorLlamada);
+        }catch (JSONException e)
+        {
+            Toast.makeText(this.getContext(),e.getMessage(),Toast.LENGTH_LONG);
+        }
     }
 }

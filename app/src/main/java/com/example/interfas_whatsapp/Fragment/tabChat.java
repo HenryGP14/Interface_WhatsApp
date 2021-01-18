@@ -67,11 +67,6 @@ public class tabChat extends Fragment implements Asynchtask {
         return fragment;
     }
 
-    private String URL = "https://reqres.in/api/users";
-    public ArrayList<user> usuarios;
-    private RecyclerView recyclerView;
-    View v;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -82,6 +77,11 @@ public class tabChat extends Fragment implements Asynchtask {
         }
 
     }
+
+    private String URL = "https://reqres.in/api/users";
+    public ArrayList<user> usuarios;
+    private RecyclerView recyclerView;
+    View v;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
