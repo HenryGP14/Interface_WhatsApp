@@ -12,4 +12,10 @@
         android:icon="@drawable/search"
         android:orderInCategory="101"
         app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/action_message"
+        android:title="Messge"
+        android:icon="@drawable/message"
+        android:orderInCategory="102"
+        app:showAsAction="ifRoom"/>
 </menu>
